@@ -64,25 +64,33 @@ Look for MACHINE PROFILES. The default is - settings_3DPrint.h.
 
 Compile for Linux PC:
 1. Install the gcc compiler for the PC then - sudo apt-get install cmake-qt-gui
+
 2. cd PC-build/
+
    cmake -DCMAKE_BUILD_TYPE=DEBUG ..
+
    make
+
 
 
 
 Cross Compile for 10049:
 
 1. Get and Install CodeSourcery.
+
   A. Change the permissions and go the the BASH shell (dpkg-reconfigure -plow bash).
      (OR - sudo ln -sf bash /bin/sh - Then sudo ln -sf bash /bin/sh to revert.)
 
   B.Get it from - https://sourcery.mentor.com/GNUToolchain/package11449/public/arm-none-linux-gnueabi
                   /arm-2013.05-24-arm-none-linux-gnueabi.bin
+
     1.Or look in - http://www.mentor.com/embedded-software/codesourcery (Get the GNU/Linux release)
 
   C. From a Command Line Terminal window - sudo arm-2013.05-24-arm-none-linux-gnueabi.bin
     1. Follow the instructions in the installer window.
+
       a. Remember/record the path where the tools are installed.
+
       b. Add this to the path of the startup from/for a command line terminal window.
         1. In .bashrc, add - PATH="/root/CodeSourcery/Sourcery_CodeBench_Lite_for_ARM_GNU_Linux/bin:$PATH"
                        and - alias sudo='sudo env PATH=$PATH'
@@ -99,40 +107,56 @@ Cross Compile for 10049:
          Type: SSH
          User name: root
          Password: root
+
   
       b. From the Unity Desktop:
          From the Top "Dash Home" icon: Or Press Alt+F2 and type nautilus into "Search" 
          When it comes up:  go to File > Browse Network and select the cfa100xx icon.
          If this doesn't work the backend is probably not installed.
+
   
       c. From Windows with WinSCP:
          The filenames will probably be maqngled and case is ignored. Not useful.
 
+
       d. If you have a problem it's probably that the registered SSH key for this IP address is unknown for
          this user on the desktop or is for a different SOM or SD card.
          1. If a window comes up asking if you can trust this new server, hit the "yes" button.
+
          2. Try - ssh 192.168.42.1 - from a Command Line Terminal window to verify the problem.
+
            a. Then - ssh-keygen -f "/home/username/ or /root/  .ssh/known_hosts" -R 192.168.42.1
+
            b. Sometimes it's best to manually delete all entries in /home/rkpdigital/.ssh/known_hosts.
             
     3. Create a CFA-921-usr folder in the working folder.
 
     4. Copy /usr/lib and /usr/include directories from the SOM to the CFA-921-usr folder.
       a. Use the Nautilus GUI to right click and "Copy" the source folder.
-      b. Use the Naulilus GUI from within the CFA-921-usr folder in the working folder to right click and "Paste" to
-         the destination.
+
+      b. Use the Naulilus GUI from within the CFA-921-usr folder in the working folder to right
+         click and "Paste" to the destination.
+
       c. May have Microsoft .dll file copy errors. - Just skip those files.
 
     5. Copy additional files from the SOM.
+
       a. Copy /lib/libpthread-2.18.so from  from the SOM to/CFA-921-usr/lib
+
       b. Copy /lib/libc-2.18.so and /lib/ld-2.18.so from the SOM to/CFA-921-usr/lib
 
+
   B. Modify the text based library redirect files.
-    1. Modify CFA-921-usr/lib/libpthread.so to point to /home/UserName/Projects/CrystalFontzRambo/CFA-921-usr/lib/
+    1. Modify CFA-921-usr/lib/libpthread.so to point to
+       /home/UserName/Projects/CrystalFontzRambo/CFA-921-usr/lib/
        as a prefix for each of the following:
+
        libpthread-2.18.so , and libpthred_nonshared.a.
-       a. In the nautilus folder GUI; Right click and "Open with Text Editor", or - 
-          double left click on the text of the file name or - 
+
+       a. In the nautilus folder GUI; Right click and "Open with Text Editor", or -
+ 
+          double left click on the text of the file name or -
+ 
           right click and "Open With Other Application" and select gedit. 
        
     2. Modify CFA-921-usr/lib/libc.so to point to /home/UserName/Projects/CrystalFontzRambo/CFA-921-usr/lib/ as a
@@ -140,18 +164,29 @@ Cross Compile for 10049:
        libc-2.18.so (Replaces libc.so.6), libc_nonshared.a , and ld-2.18.so(Replaces ld-linux.so.3).
 
   C. Create soft links in CFA-921-usr/lib:
+
     1. Create a soft link called libudev.so.0 that points to libudev.so
+
       a. From the nautilus folder GUI; Right click on libudif.so and "Make Link"
+
       b. In the nautilus folder GUI; Find "Link to libudev.so"
-      c. From the nautilus folder GUI; Right click on "Link to libudev.so" and "Rename" it to "libudev.so.0".
+
+      c. From the nautilus folder GUI; Right click on "Link to libudev.so" and
+         "Rename" it to "libudev.so.0".
+
     2. Create a soft link called libz.so.1 that points to libz.so
+
     3. Create a soft link called libQtSerialPortE.so that points to libQtSerialPortE.so.1
+
 
 3. Edit the "codesourcery_toolchain.cmake" file to point to your tools and libraries.
 
 4. cd ARM-build/
+
    cmake -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_TOOLCHAIN_FILE=codesourcery_toolchain.cmake ..
+
    make
+
 
 
 
@@ -160,7 +195,7 @@ Operation:
 
    F3600 ( The program will error out without a limit loaded.)
 
-2. ./10049G2 -g <Input "G" code file> -f <output FIQ code file>
+2. ./10049G2 -g "Input "G" code file" -f "output FIQ code file"
 
 3. Must Ctrl-c to exit the program after the conversion is complete.
      There isn't much progress reporting (Once every 512 lines of "G" code.). 
