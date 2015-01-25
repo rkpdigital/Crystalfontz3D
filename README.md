@@ -6,15 +6,17 @@ Crystalfontz3D is to be a port of TinyG2 that runs on the CrystalFontz 10049 boa
     2. Using ARM specific FIQ hardware that is unused by Linux for real time operations.
     3. Communication and control is from a console and from gcode files.
       A, This console can be commandeered by the UI program for a GUI user interface.
-    4. Output is to FIQ10049 and slowCmd files for use by another user application that loads the FIQ
-       steps file. (slowCmd file not yet implemented.)
+    4. Output is to FIQ10049 and slowCmd files for use by another user application that loads
+       the FIQ steps file. (slowCmd file not yet implemented.)
     5. Status output is to the console.
     6. Latest System Configuration is to a file instead of ARM NVM.
-    7. Versions to run on a desktop Linux system or on the 10036/10049 SOM and printer controller board.
+    7. Versions to run on a desktop Linux system or on the 10036/10049 SOM and printer
+       controller board.
     8. Much of the TinyG2 code is mostly unchanged except stepper, switches, and hardware.
        (PWM and spindle are left out for now.)
-    9. Crystalfontz3D doesn't use any interrupts. Another application transfers the FIQ steps file
-       to the FIQ shared memory for real time control of the 3D printer from the fast FIQ interrupt.
+    9. Crystalfontz3D doesn't use any interrupts. Another application transfers the FIQ steps
+       file to the FIQ shared memory for real time control of the 3D printer from the fast
+       FIQ interrupt.
 
 The license is:
                     GNU GENERAL PUBLIC LICENSE
@@ -40,9 +42,10 @@ G2 has a number of advanced features, including:
 
 Versions:
 10049G2LEG - Old code for use with the compiled in FIQ code that expecte 2 12byte commands for each step.
+
 10049G2FIQ - New FIQ structure with 1 8byte command and a state machine in the FIQ to do 2 interrupts.
-             cfa10049_fiq.hand stepper.cpp are the major changes along with the cfa10049_new_fiq (TBD) loadable module.
-             See "Proposed Small file FIQ"
+             cfa10049_fiq.hand stepper.cpp are the major changes along with the cfa10049_new_fiq (TBD)
+             loadable module. See "Proposed Small file FIQ"
 
 Version 2.0 dated 08/20/14 - FIQ and LEG versions - Also uses MOTOR_STATE more effectivly in stepper.cpp for
                                                     _load_move, and _output_to_FIQ to speed execution up by 33%.
@@ -70,10 +73,12 @@ Cross Compile for 10049:
 1. Get and Install CodeSourcery.
   A. Change the permissions and go the the BASH shell (dpkg-reconfigure -plow bash).
      (OR - sudo ln -sf bash /bin/sh - Then sudo ln -sf bash /bin/sh to revert.)
-  A Get it from - https://sourcery.mentor.com/GNUToolchain/package11449/public/arm-none-linux-gnueabi
+
+  B.Get it from - https://sourcery.mentor.com/GNUToolchain/package11449/public/arm-none-linux-gnueabi
                   /arm-2013.05-24-arm-none-linux-gnueabi.bin
-    1.Or look in - http://www.mentor.com/embedded-software/codesourcery (Get the GNU/Linux release
-  B. From a Command Line Terminal window - sudo arm-2013.05-24-arm-none-linux-gnueabi.bin
+    1.Or look in - http://www.mentor.com/embedded-software/codesourcery (Get the GNU/Linux release)
+
+  C. From a Command Line Terminal window - sudo arm-2013.05-24-arm-none-linux-gnueabi.bin
     1. Follow the instructions in the installer window.
       a. Remember/record the path where the tools are installed.
       b. Add this to the path of the startup from/for a command line terminal window.
@@ -150,6 +155,7 @@ Cross Compile for 10049:
 
 Operation:
 1. The input "G" code file should contain the following instructions to set up limits.
+
    F3600 ( The program will error out without a limit loaded.)
 
 2. ./10049G2 -g <Input "G" code file> -f <output FIQ code file>

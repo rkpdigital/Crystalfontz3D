@@ -1,0 +1,10 @@
+(Test program 1)
+N1 G17
+N2 G21 (mm)
+N3 f3600
+N4 G1X20
+N5 G1Y10
+N6 G1X10
+N7 G1Y20
+N8 M30
+

@@ -1,0 +1,382 @@
+application/config_app.cpp:		strncpy(cmd->token, list[i], CMD_TOKEN_LEN);
+application/config_app.cpp:        cmd->index = cmd_get_index("", cmd->token);
+application/config_app.cpp://		cmd->objtype = TYPE_PARENT;
+application/config_app.cpp:	strcpy(cmd->token,"sys");			// print system group
+application/config_app.cpp:	strcpy(cmd->token,"p1");			// print PWM group
+application/gcode_parser.cpp:	cmd->objtype = TYPE_STRING;
+application/gcode_parser.cpp:	return(gc_gcode_parser(*cmd->stringp));
+application/config.cpp:	if (cmd->index >= cmd_index_max()) { return (STAT_INTERNAL_RANGE_ERROR);}
+application/config.cpp:	if (cmd->index >= cmd_index_max()) { return(STAT_INTERNAL_RANGE_ERROR);}
+application/config.cpp:	if (cmd->index >= cmd_index_max()) return;
+application/config.cpp:	if (cmd_index_lt_groups(cmd->index) == false) return;
+application/config.cpp:	if (GET_TABLE_BYTE(flags) & F_PERSIST) cmd_write_NVM_value(cmd, cmd->index);
+application/config.cpp:	cmd->index = 0;						// this will read the first record in NVM
+application/config.cpp:	if ((cmd_read_NVM_value(cmd, cmd->index) == STAT_FILE_NOT_OPEN) || (cmd->value != cs.fw_build))
+application/config.cpp:		cmd->value = true;				// case (1) NVM is not setup or not in revision
+application/config.cpp:	    for (cmd->index=0; cmd_index_is_single(cmd->index); cmd->index++)
+application/config.cpp:            strcpy(cmd->token, cfgArray[cmd->index].token);	// read the token from the array
+application/config.cpp:            if (cmd_read_NVM_value(cmd, cmd->index) == STAT_OK)
+application/config.cpp:	if (fp_FALSE(cmd->value)) {				// failsafe. Must set true or no action occurs
+application/config.cpp:	for (cmd->index=0; cmd_index_is_single(cmd->index); cmd->index++) {
+application/config.cpp:			cmd->value = GET_TABLE_FLOAT(def_value);
+application/config.cpp:            strcpy(cmd->token, cfgArray[cmd->index].token);
+application/config.cpp:	cmd->objtype = TYPE_NULL;
+application/config.cpp:	cmd->value = (float)*((uint8_t *)GET_TABLE_WORD(target));
+application/config.cpp:	cmd->objtype = TYPE_INTEGER;
+application/config.cpp:	cmd->value = (float)*((uint32_t *)GET_TABLE_WORD(target));
+application/config.cpp:	cmd->objtype = TYPE_INTEGER;
+application/config.cpp:	cmd->value = *((float *)GET_TABLE_WORD(target));
+application/config.cpp:	cmd->precision = (int8_t)GET_TABLE_WORD(precision);
+application/config.cpp:	cmd->objtype = TYPE_FLOAT;
+application/config.cpp:	*((uint8_t *)GET_TABLE_WORD(target)) = cmd->value;
+application/config.cpp:	cmd->objtype = TYPE_INTEGER;
+application/config.cpp:	if (cmd->value > 1) return (STAT_INPUT_VALUE_UNSUPPORTED);	// if
+application/config.cpp:	if (cmd->value > 2) return (STAT_INPUT_VALUE_UNSUPPORTED);	// if
+application/config.cpp:	if (cmd->value > 3) return (STAT_INPUT_VALUE_UNSUPPORTED);	// if
+application/config.cpp:	*((uint32_t *)tempwatch) = cmd->value;
+application/config.cpp:	cmd->objtype = TYPE_INTEGER;
+application/config.cpp:	*((float *)GET_TABLE_WORD(target)) = cmd->value;
+application/config.cpp:	cmd->precision = GET_TABLE_WORD(precision);
+application/config.cpp:	cmd->objtype = TYPE_FLOAT;
+application/config.cpp:	if (cm_get_units_mode(MODEL) == INCHES) cmd->value *= INCH_PER_MM;
+application/config.cpp: * but the original cmd->value is not changed so display works correctly.
+application/config.cpp:	float tmp_value = cmd->value;
+application/config.cpp:	cmd->precision = GET_TABLE_WORD(precision);
+application/config.cpp:	cmd->objtype = TYPE_FLOAT;
+application/config.cpp:    char *parent_group = cmd->token;		// token in the parent cmd object is the group
+application/config.cpp:	cmd->objtype = TYPE_PARENT;				// make first object the parent
+application/config.cpp: *	the value for each depending on the cmd->objtype.
+application/config.cpp:		if ((cmd = cmd->nx) == NULL) break;
+application/config.cpp:		if (cmd->objtype == TYPE_EMPTY) break;
+application/config.cpp:		else if (cmd->objtype == TYPE_NULL)	// NULL means GET the value
+application/config.cpp:	if (cmd->token[0] == NUL) return (CMD_TYPE_NULL);
+application/config.cpp:	if (strcmp("gc", cmd->token) == 0) return (CMD_TYPE_GCODE);
+application/config.cpp:	if (strcmp("sr", cmd->token) == 0) return (CMD_TYPE_REPORT);
+application/config.cpp:	if (strcmp("qr", cmd->token) == 0) return (CMD_TYPE_REPORT);
+application/config.cpp:	if (strcmp("msg",cmd->token) == 0) return (CMD_TYPE_MESSAGE);
+application/config.cpp:	if (strcmp("err",cmd->token) == 0) return (CMD_TYPE_MESSAGE); 	// errors are reported as messages
+application/config.cpp:	if (strcmp("n",  cmd->token) == 0) return (CMD_TYPE_LINENUM);
+application/config.cpp:	if (cmd->index >= cmd_index_max()) { return; }	// sanity
+application/config.cpp:	index_t tmp = cmd->index;
+application/config.cpp:	cmd->index = tmp;
+application/config.cpp:    strcpy(cmd->token, cfgArray[cmd->index].token); // token field is always terminated
+application/config.cpp:    strcpy(cmd->group, cfgArray[cmd->index].group); // group field is always terminated
+application/config.cpp:	if (cmd->group[0] != NUL) {
+application/config.cpp:			cmd->group[0] = NUL;
+application/config.cpp:			strcpy(cmd->token, &cmd->token[strlen(cmd->group)]); // strip group from the token
+application/config.cpp:	cmd->objtype = TYPE_EMPTY;				// selective clear is much faster than calling memset
+application/config.cpp:	cmd->index = 0;
+application/config.cpp:	cmd->value = 0;
+application/config.cpp:	cmd->precision = 0;
+application/config.cpp:	cmd->token[0] = NUL;
+application/config.cpp:	cmd->group[0] = NUL;
+application/config.cpp:	cmd->stringp = NULL;
+application/config.cpp:	if (cmd->pv == NULL) { 					// set depth correctly
+application/config.cpp:		cmd->depth = 0;
+application/config.cpp:		if (cmd->pv->objtype == TYPE_PARENT) {
+application/config.cpp:			cmd->depth = cmd->pv->depth + 1;
+application/config.cpp:			cmd->depth = cmd->pv->depth;
+application/config.cpp:		cmd->pv = (cmd-1);					// the ends are bogus & corrected later
+application/config.cpp:		cmd->nx = (cmd+1);
+application/config.cpp:		cmd->index = 0;
+application/config.cpp:		cmd->depth = 1;						// header and footer are corrected later
+application/config.cpp:		cmd->precision = 0;
+application/config.cpp:		cmd->objtype = TYPE_EMPTY;
+application/config.cpp:		cmd->token[0] = NUL;
+application/config.cpp:	cmd->pv = NULL;
+application/config.cpp:	cmd->depth = 0;
+application/config.cpp:	cmd->objtype = TYPE_PARENT;
+application/config.cpp:	strcpy(cmd->token, "r");
+application/config.cpp:    cmd->stringp = (char (*)[])dst;
+application/config.cpp:		if (cmd->objtype != TYPE_EMPTY) {
+application/config.cpp:			if ((cmd = cmd->nx) == NULL) return(NULL); // not supposed to find a NULL; here for safety
+application/config.cpp:        if ((cmd->index = cmd_get_index((const char *)"",token)) == NO_MATCH) { return (NULL);}
+application/config.cpp:		if (cmd->objtype != TYPE_EMPTY) {
+application/config.cpp:			if ((cmd = cmd->nx) == NULL) return(NULL); // not supposed to find a NULL; here for safety
+application/config.cpp:		strncpy(cmd->token, token, CMD_TOKEN_LEN);
+application/config.cpp:		cmd->value = (float) value;
+application/config.cpp:		cmd->objtype = TYPE_INTEGER;
+application/config.cpp:		if (cmd->objtype != TYPE_EMPTY) {
+application/config.cpp:			if ((cmd = cmd->nx) == NULL) return(NULL);	// not supposed to find a NULL; here for safety
+application/config.cpp:		strncpy(cmd->token, token, CMD_TOKEN_LEN);
+application/config.cpp:		cmd->value = value;
+application/config.cpp:		cmd->objtype = TYPE_FLOAT;
+application/config.cpp:		if (cmd->objtype != TYPE_EMPTY) {
+application/config.cpp:			if ((cmd = cmd->nx) == NULL) return(NULL);		// not supposed to find a NULL; here for safety
+application/config.cpp:		strncpy(cmd->token, token, CMD_TOKEN_LEN);
+application/config.cpp:        cmd->index = cmd_get_index((const char *)"", cmd->token);
+application/config.cpp:		cmd->objtype = TYPE_STRING;
+application/config.cpp:    memcpy(&cmd->value, &nvm_byte_array, NVM_VALUE_LEN);
+application/config.cpp://    float tmp = cmd->value;
+application/config.cpp:    memcpy(&nvm_byte_array, &cmd->value, NVM_VALUE_LEN);
+application/config.cpp:    fwrite(&cmd->value, 1, NVM_VALUE_LEN, Cfg_fp);
+application/canonical_machine.cpp:	cmd->value = (float)value;
+application/canonical_machine.cpp:	cmd->objtype = TYPE_INTEGER;
+application/canonical_machine.cpp:	cmd->value = (float)cm_get_tool(ACTIVE_MODEL);
+application/canonical_machine.cpp:	cmd->objtype = TYPE_INTEGER;
+application/canonical_machine.cpp:	cmd->value = (float)cm_get_linenum(MODEL);
+application/canonical_machine.cpp:	cmd->objtype = TYPE_INTEGER;
+application/canonical_machine.cpp:	cmd->value = (float)cm_get_linenum(ACTIVE_MODEL);
+application/canonical_machine.cpp:	cmd->objtype = TYPE_INTEGER;
+application/canonical_machine.cpp:		cmd->value = 0;
+application/canonical_machine.cpp:		cmd->value = mp_get_runtime_velocity();
+application/canonical_machine.cpp:		if (cm_get_units_mode(RUNTIME) == INCHES) cmd->value *= INCH_PER_MM;
+application/canonical_machine.cpp:	cmd->precision = GET_TABLE_WORD(precision);
+application/canonical_machine.cpp:	cmd->objtype = TYPE_FLOAT;
+application/canonical_machine.cpp:	cmd->value = cm_get_work_position(ACTIVE_MODEL, _get_axis(cmd->index));
+application/canonical_machine.cpp:	cmd->precision = GET_TABLE_WORD(precision);
+application/canonical_machine.cpp:	cmd->objtype = TYPE_FLOAT;
+application/canonical_machine.cpp:	cmd->value = cm_get_absolute_position(RUNTIME, _get_axis(cmd->index));
+application/canonical_machine.cpp:	cmd->precision = GET_TABLE_WORD(precision);
+application/canonical_machine.cpp:	cmd->objtype = TYPE_FLOAT;
+application/canonical_machine.cpp:	cmd->value = cm_get_work_offset(ACTIVE_MODEL, _get_axis(cmd->index));
+application/canonical_machine.cpp:	cmd->precision = GET_TABLE_WORD(precision);
+application/canonical_machine.cpp:	cmd->objtype = TYPE_FLOAT;
+application/canonical_machine.cpp:	return(_get_msg_helper(cmd, msg_am, cmd->value));
+application/canonical_machine.cpp:	if (_get_axis_type(cmd->index) == 0) {	// linear
+application/canonical_machine.cpp:		if (cmd->value > AXIS_MODE_MAX_LINEAR) { return (STAT_INPUT_VALUE_UNSUPPORTED);}
+application/canonical_machine.cpp:		if (cmd->value > AXIS_MODE_MAX_ROTARY) { return (STAT_INPUT_VALUE_UNSUPPORTED);}
+application/canonical_machine.cpp:	if (cmd->value > 1000000) cmd->value /= 1000000;
+application/canonical_machine.cpp:	if (fp_TRUE(cmd->value)) { cm_homing_cycle_start();}
+application/canonical_machine.cpp:    fprintf(stderr, format, cmd->group, cmd->token, cmd->group, (uint8_t)cmd->value);
+application/canonical_machine.cpp:	if (_get_axis_type(cmd->index) == 0) {	// linear
+application/canonical_machine.cpp:    fprintf(stderr, format, cmd->group, cmd->token, cmd->group, cmd->value, units);
+application/canonical_machine.cpp:	if (_get_axis_type(cmd->index) == 0) {	// linear
+application/canonical_machine.cpp:    fprintf(stderr, format, cmd->group, cmd->token, cmd->group, cmd->token, cmd->value, units);
+application/canonical_machine.cpp:	uint8_t axis = _get_axis(cmd->index);
+application/canonical_machine.cpp:    fprintf(stderr, format, axes[axis], cmd->value, GET_TEXT_ITEM(msg_units, units));
+application/canonical_machine.cpp:    fprintf(stderr, fmt_Xam, cmd->group, cmd->token, cmd->group, (uint8_t)cmd->value,
+application/canonical_machine.cpp:	GET_TEXT_ITEM(msg_am, (uint8_t)cmd->value));
+application/config.cpp~:	if (cmd->index >= cmd_index_max()) { return (STAT_INTERNAL_RANGE_ERROR);}
+application/config.cpp~:	if (cmd->index >= cmd_index_max()) { return(STAT_INTERNAL_RANGE_ERROR);}
+application/config.cpp~:	if (cmd->index >= cmd_index_max()) return;
+application/config.cpp~:	if (cmd_index_lt_groups(cmd->index) == false) return;
+application/config.cpp~:	if (GET_TABLE_BYTE(flags) & F_PERSIST) cmd_write_NVM_value(cmd, cmd->index);
+application/config.cpp~:	cmd->index = 0;						// this will read the first record in NVM
+application/config.cpp~:	if ((cmd_read_NVM_value(cmd, cmd->index) == STAT_FILE_NOT_OPEN) || (cmd->value != cs.fw_build))
+application/config.cpp~:		cmd->value = true;				// case (1) NVM is not setup or not in revision
+application/config.cpp~:	    for (cmd->index=0; cmd_index_is_single(cmd->index); cmd->index++)
+application/config.cpp~:            strcpy(cmd->token, cfgArray[cmd->index].token);	// read the token from the array
+application/config.cpp~:            if (cmd_read_NVM_value(cmd, cmd->index) == STAT_OK)
+application/config.cpp~:	if (fp_FALSE(cmd->value)) {				// failsafe. Must set true or no action occurs
+application/config.cpp~:	for (cmd->index=0; cmd_index_is_single(cmd->index); cmd->index++) {
+application/config.cpp~:			cmd->value = GET_TABLE_FLOAT(def_value);
+application/config.cpp~:            strcpy(cmd->token, cfgArray[cmd->index].token);
+application/config.cpp~:	cmd->objtype = TYPE_NULL;
+application/config.cpp~:	cmd->value = (float)*((uint8_t *)GET_TABLE_WORD(target));
+application/config.cpp~:	cmd->objtype = TYPE_INTEGER;
+application/config.cpp~:	cmd->value = (float)*((uint32_t *)GET_TABLE_WORD(target));
+application/config.cpp~:	cmd->objtype = TYPE_INTEGER;
+application/config.cpp~:	cmd->value = *((float *)GET_TABLE_WORD(target));
+application/config.cpp~:	cmd->precision = (int8_t)GET_TABLE_WORD(precision);
+application/config.cpp~:	cmd->objtype = TYPE_FLOAT;
+application/config.cpp~:	*((uint8_t *)GET_TABLE_WORD(target)) = cmd->value;
+application/config.cpp~:	cmd->objtype = TYPE_INTEGER;
+application/config.cpp~:	if (cmd->value > 1) return (STAT_INPUT_VALUE_UNSUPPORTED);	// if
+application/config.cpp~:	if (cmd->value > 2) return (STAT_INPUT_VALUE_UNSUPPORTED);	// if
+application/config.cpp~:	if (cmd->value > 3) return (STAT_INPUT_VALUE_UNSUPPORTED);	// if
+application/config.cpp~:	*((uint32_t *)temp) = cmd->value;
+application/config.cpp~:	cmd->objtype = TYPE_INTEGER;
+application/config.cpp~:	*((float *)GET_TABLE_WORD(target)) = cmd->value;
+application/config.cpp~:	cmd->precision = GET_TABLE_WORD(precision);
+application/config.cpp~:	cmd->objtype = TYPE_FLOAT;
+application/config.cpp~:	if (cm_get_units_mode(MODEL) == INCHES) cmd->value *= INCH_PER_MM;
+application/config.cpp~: * but the original cmd->value is not changed so display works correctly.
+application/config.cpp~:	float tmp_value = cmd->value;
+application/config.cpp~:	cmd->precision = GET_TABLE_WORD(precision);
+application/config.cpp~:	cmd->objtype = TYPE_FLOAT;
+application/config.cpp~:    char *parent_group = cmd->token;		// token in the parent cmd object is the group
+application/config.cpp~:	cmd->objtype = TYPE_PARENT;				// make first object the parent
+application/config.cpp~: *	the value for each depending on the cmd->objtype.
+application/config.cpp~:		if ((cmd = cmd->nx) == NULL) break;
+application/config.cpp~:		if (cmd->objtype == TYPE_EMPTY) break;
+application/config.cpp~:		else if (cmd->objtype == TYPE_NULL)	// NULL means GET the value
+application/config.cpp~:	if (cmd->token[0] == NUL) return (CMD_TYPE_NULL);
+application/config.cpp~:	if (strcmp("gc", cmd->token) == 0) return (CMD_TYPE_GCODE);
+application/config.cpp~:	if (strcmp("sr", cmd->token) == 0) return (CMD_TYPE_REPORT);
+application/config.cpp~:	if (strcmp("qr", cmd->token) == 0) return (CMD_TYPE_REPORT);
+application/config.cpp~:	if (strcmp("msg",cmd->token) == 0) return (CMD_TYPE_MESSAGE);
+application/config.cpp~:	if (strcmp("err",cmd->token) == 0) return (CMD_TYPE_MESSAGE); 	// errors are reported as messages
+application/config.cpp~:	if (strcmp("n",  cmd->token) == 0) return (CMD_TYPE_LINENUM);
+application/config.cpp~:	if (cmd->index >= cmd_index_max()) { return; }	// sanity
+application/config.cpp~:	index_t tmp = cmd->index;
+application/config.cpp~:	cmd->index = tmp;
+application/config.cpp~:    strcpy(cmd->token, cfgArray[cmd->index].token); // token field is always terminated
+application/config.cpp~:    strcpy(cmd->group, cfgArray[cmd->index].group); // group field is always terminated
+application/config.cpp~:	if (cmd->group[0] != NUL) {
+application/config.cpp~:			cmd->group[0] = NUL;
+application/config.cpp~:			strcpy(cmd->token, &cmd->token[strlen(cmd->group)]); // strip group from the token
+application/config.cpp~:	cmd->objtype = TYPE_EMPTY;				// selective clear is much faster than calling memset
+application/config.cpp~:	cmd->index = 0;
+application/config.cpp~:	cmd->value = 0;
+application/config.cpp~:	cmd->precision = 0;
+application/config.cpp~:	cmd->token[0] = NUL;
+application/config.cpp~:	cmd->group[0] = NUL;
+application/config.cpp~:	cmd->stringp = NULL;
+application/config.cpp~:	if (cmd->pv == NULL) { 					// set depth correctly
+application/config.cpp~:		cmd->depth = 0;
+application/config.cpp~:		if (cmd->pv->objtype == TYPE_PARENT) {
+application/config.cpp~:			cmd->depth = cmd->pv->depth + 1;
+application/config.cpp~:			cmd->depth = cmd->pv->depth;
+application/config.cpp~:		cmd->pv = (cmd-1);					// the ends are bogus & corrected later
+application/config.cpp~:		cmd->nx = (cmd+1);
+application/config.cpp~:		cmd->index = 0;
+application/config.cpp~:		cmd->depth = 1;						// header and footer are corrected later
+application/config.cpp~:		cmd->precision = 0;
+application/config.cpp~:		cmd->objtype = TYPE_EMPTY;
+application/config.cpp~:		cmd->token[0] = NUL;
+application/config.cpp~:	cmd->pv = NULL;
+application/config.cpp~:	cmd->depth = 0;
+application/config.cpp~:	cmd->objtype = TYPE_PARENT;
+application/config.cpp~:	strcpy(cmd->token, "r");
+application/config.cpp~:    cmd->stringp = (char (*)[])dst;
+application/config.cpp~:		if (cmd->objtype != TYPE_EMPTY) {
+application/config.cpp~:			if ((cmd = cmd->nx) == NULL) return(NULL); // not supposed to find a NULL; here for safety
+application/config.cpp~:        if ((cmd->index = cmd_get_index((const char *)"",token)) == NO_MATCH) { return (NULL);}
+application/config.cpp~:		if (cmd->objtype != TYPE_EMPTY) {
+application/config.cpp~:			if ((cmd = cmd->nx) == NULL) return(NULL); // not supposed to find a NULL; here for safety
+application/config.cpp~:		strncpy(cmd->token, token, CMD_TOKEN_LEN);
+application/config.cpp~:		cmd->value = (float) value;
+application/config.cpp~:		cmd->objtype = TYPE_INTEGER;
+application/config.cpp~:		if (cmd->objtype != TYPE_EMPTY) {
+application/config.cpp~:			if ((cmd = cmd->nx) == NULL) return(NULL);	// not supposed to find a NULL; here for safety
+application/config.cpp~:		strncpy(cmd->token, token, CMD_TOKEN_LEN);
+application/config.cpp~:		cmd->value = value;
+application/config.cpp~:		cmd->objtype = TYPE_FLOAT;
+application/config.cpp~:		if (cmd->objtype != TYPE_EMPTY) {
+application/config.cpp~:			if ((cmd = cmd->nx) == NULL) return(NULL);		// not supposed to find a NULL; here for safety
+application/config.cpp~:		strncpy(cmd->token, token, CMD_TOKEN_LEN);
+application/config.cpp~:        cmd->index = cmd_get_index((const char *)"", cmd->token);
+application/config.cpp~:		cmd->objtype = TYPE_STRING;
+application/config.cpp~:    memcpy(&cmd->value, &nvm_byte_array, NVM_VALUE_LEN);
+application/config.cpp~://    float tmp = cmd->value;
+application/config.cpp~:    memcpy(&nvm_byte_array, &cmd->value, NVM_VALUE_LEN);
+application/config.cpp~:    fwrite(&cmd->value, 1, NVM_VALUE_LEN, Cfg_fp);
+include/tinyg2.h~:													// gets rely on cmd->index having been set
+include/tinyg2.h~:#define GET_TABLE_WORD(a)  cfgArray[cmd->index].a	// get word value from cfgArray
+include/tinyg2.h~:#define GET_TABLE_BYTE(a)  cfgArray[cmd->index].a	// get byte value from cfgArray
+include/tinyg2.h~:#define GET_TABLE_FLOAT(a) cfgArray[cmd->index].a	// get byte value from cfgArray
+include/tinyg2.h:													// gets rely on cmd->index having been set
+include/tinyg2.h:#define GET_TABLE_WORD(a)  cfgArray[cmd->index].a	// get word value from cfgArray
+include/tinyg2.h:#define GET_TABLE_BYTE(a)  cfgArray[cmd->index].a	// get byte value from cfgArray
+include/tinyg2.h:#define GET_TABLE_FLOAT(a) cfgArray[cmd->index].a	// get byte value from cfgArray
+platform/switch.cpp:	if (cmd->value > SW_MODE_MAX_VALUE) { return (STAT_INPUT_VALUE_UNSUPPORTED);}
+platform/switch.cpp://void sw_print_ss(cmdObj_t *cmd) { fprintf(stderr, fmt_ss, cmd->token, (uint8_t)cmd->value);}
+platform/stepper.cpp:    uint8_t m = _get_motor(cmd->index);
+platform/stepper.cpp:	if (fp_NE(cmd->value,1) && fp_NE(cmd->value,2) && fp_NE(cmd->value,4) && fp_NE(cmd->value,8)) {
+platform/stepper.cpp:	_set_hw_microsteps(_get_motor(cmd->index), (uint8_t)cmd->value);
+platform/stepper.cpp:	if (fp_ZERO(cmd->value)) { // people asked this setting take effect immediately, hence:
+platform/stepper.cpp:        _motor_energize_ctrl(_get_motor(cmd->index), 0);  //Set denergize to 0 to energize
+platform/stepper.cpp:        _motor_energize_ctrl(_get_motor(cmd->index), 1);  //Set denergize to 1 to deenergize
+platform/stepper.cpp:	st.motor_idle_timeout = min(IDLE_TIMEOUT_SECONDS_MAX, max(cmd->value, IDLE_TIMEOUT_SECONDS_MIN));
+platform/stepper.cpp:    fprintf(stderr, format, cmd->group, cmd->token, cmd->group, (uint8_t)cmd->value);
+platform/stepper.cpp:    fprintf(stderr, format, cmd->group, cmd->token, cmd->group, cmd->value, GET_TEXT_ITEM(msg_units, units));
+platform/report.cpp:	cmd->index = cmd_get_index((const char *)"", (const char *)"se00");	// set first SR persistence index
+platform/report.cpp:		cmd->value = cmd_get_index((const char *)"", sr_defaults[i]);// load the index for the SR element
+platform/report.cpp:		cmd->index++;									// increment SR NVM index
+platform/report.cpp:		if (((cmd = cmd->nx) == NULL) || (cmd->objtype == TYPE_EMPTY)) { break;}
+platform/report.cpp:		if ((cmd->objtype == TYPE_BOOL) && (fp_TRUE(cmd->value))) {
+platform/report.cpp:			status_report_list[i] = cmd->index;
+platform/report.cpp:			cmd->value = cmd->index;					// persist the index as the value
+platform/report.cpp:			cmd->index = sr_start + i;					// index of the SR persistence location
+platform/report.cpp:	cmd->objtype = TYPE_PARENT; 			// setup the parent object
+platform/report.cpp:	strcpy(cmd->token, sr_str);
+platform/report.cpp:	cmd->index = cmd_get_index((const char *)"", sr_str);// set the index - may be needed by calling function
+platform/report.cpp:	cmd = cmd->nx;							// no need to check for NULL as list has just been reset
+platform/report.cpp:		if ((cmd->index = sr.status_report_list[i]) == 0) { break;}
+platform/report.cpp:		strcpy(tmp, cmd->group);			// concatenate groups and tokens
+platform/report.cpp:		strcat(tmp, cmd->token);
+platform/report.cpp:		strcpy(cmd->token, tmp);
+platform/report.cpp:		if ((cmd = cmd->nx) == NULL)
+platform/report.cpp:	cmd->objtype = TYPE_PARENT; 			// setup the parent object
+platform/report.cpp:	strcpy(cmd->token, sr_str);
+platform/report.cpp://	cmd->index = cmd_get_index((const char *)"", sr_str);// OMITTED - set the index - may be needed by calling function
+platform/report.cpp:	cmd = cmd->nx;							// no need to check for NULL as list has just been reset
+platform/report.cpp:		if ((cmd->index = sr.status_report_list[i]) == 0) { break;}
+platform/report.cpp:		if (fp_EQ(cmd->value, sr.status_report_value[i])) {
+platform/report.cpp:			cmd->objtype = TYPE_EMPTY;
+platform/report.cpp:			strcpy(tmp, cmd->group);		// flatten out groups
+platform/report.cpp:			strcat(tmp, cmd->token);
+platform/report.cpp:			strcpy(cmd->token, tmp);
+platform/report.cpp:			sr.status_report_value[i] = cmd->value;
+platform/report.cpp:			if ((cmd = cmd->nx) == NULL) return (false); // should never be NULL unless SR length exceeds available buffer array
+platform/report.cpp:	if (cmd->value < STATUS_REPORT_MIN_MS) { cmd->value = STATUS_REPORT_MIN_MS;}
+platform/report.cpp:	sr.status_report_interval = (uint32_t)cmd->value;
+platform/report.cpp:	cmd->value = (float)mp_get_planner_buffers_available();
+platform/report.cpp:	cmd->objtype = TYPE_INTEGER;
+platform/report.cpp:	cmd->nx = NULL;							// terminate the list
+platform/report.cpp:    sprintf(cmd->token, PSTR("qr"));
+platform/report.cpp:	cmd->value = qr.buffers_available;
+platform/report.cpp:	cmd->objtype = TYPE_INTEGER;
+platform/text_parser.cpp:	if ((cmd->objtype == TYPE_NULL) || (cmd->objtype == TYPE_PARENT)) {
+platform/text_parser.cpp:	cmd->objtype = TYPE_NULL;
+platform/text_parser.cpp:		strncpy(cmd->token, str, CMD_TOKEN_LEN);
+platform/text_parser.cpp:		strncpy(cmd->token, str, CMD_TOKEN_LEN);
+platform/text_parser.cpp:		cmd->value = strtof(str, &rd);		// rd used as end pointer
+platform/text_parser.cpp:			cmd->objtype = TYPE_FLOAT;
+platform/text_parser.cpp:    if ((cmd->index = cmd_get_index((const char *)"", cmd->token)) == NO_MATCH) { // get index or fail it
+platform/text_parser.cpp:    strcpy(cmd->group, cfgArray[cmd->index].group);// capture the group string if there is one
+platform/text_parser.cpp:	if ((cmd_index_is_group(cmd->index)) && (cmd_group_is_prefixed(cmd->token))) {
+platform/text_parser.cpp:		wr = cmd->token;
+platform/text_parser.cpp:		rd = cmd->token + strlen(cmd->group);
+platform/text_parser.cpp:        fprintf(stderr, prompt_cmd, *cmd->stringp);
+platform/text_parser.cpp:		switch (cmd->objtype) {
+platform/text_parser.cpp:			case TYPE_PARENT: 	{ if ((cmd = cmd->nx) == NULL) return; continue;} // NULL means parent with no child
+platform/text_parser.cpp:            case TYPE_FLOAT:	{ fprintf(stderr,PSTR("%s:%1.3f"), cmd->token, cmd->value); break;}
+platform/text_parser.cpp:            case TYPE_INTEGER:	{ fprintf(stderr,PSTR("%s:%1.0f"), cmd->token, cmd->value); break;}
+platform/text_parser.cpp:            case TYPE_STRING:	{ fprintf(stderr,PSTR("%s:%s"), cmd->token, *cmd->stringp); break;}
+platform/text_parser.cpp:		if ((cmd = cmd->nx) == NULL) return;
+platform/text_parser.cpp:        if (cmd->objtype != TYPE_EMPTY) { fprintf(stderr,PSTR(","));}
+platform/text_parser.cpp:		switch (cmd->objtype) {
+platform/text_parser.cpp:			case TYPE_PARENT: 	{ if ((cmd = cmd->nx) == NULL) return; continue;} // NULL means parent with no child
+platform/text_parser.cpp:            case TYPE_FLOAT:	{ fprintf(stderr,PSTR("%1.3f"), cmd->value); break;}
+platform/text_parser.cpp:            case TYPE_INTEGER:	{ fprintf(stderr,PSTR("%1.0f"), cmd->value); break;}
+platform/text_parser.cpp:            case TYPE_STRING:	{ fprintf(stderr,PSTR("%s"), *cmd->stringp); break;}
+platform/text_parser.cpp:		if ((cmd = cmd->nx) == NULL) return;
+platform/text_parser.cpp:        if (cmd->objtype != TYPE_EMPTY) { fprintf(stderr,PSTR(","));}
+platform/text_parser.cpp:		if (cmd->objtype != TYPE_PARENT) { cmd_print(cmd);}
+platform/text_parser.cpp:		if ((cmd = cmd->nx) == NULL) return;
+platform/text_parser.cpp:		if (cmd->objtype == TYPE_EMPTY) break;
+platform/text_parser.cpp:void text_print_str(cmdObj_t *cmd, const char *format) { fprintf(stderr, format, *cmd->stringp);}
+platform/text_parser.cpp:void text_print_ui8(cmdObj_t *cmd, const char *format) { fprintf(stderr, format, (uint8_t)cmd->value);}
+platform/text_parser.cpp:void text_print_int(cmdObj_t *cmd, const char *format) { fprintf(stderr, format, (uint32_t)cmd->value);}
+platform/text_parser.cpp:void text_print_flt(cmdObj_t *cmd, const char *format) { fprintf(stderr, format, cmd->value);}
+platform/text_parser.cpp:    fprintf(stderr, format, cmd->value, units);
+platform/hardware.cpp://	cmd->objtype = TYPE_STRING;
+platform/report.cpp~:	cmd->index = cmd_get_index((const char *)"", (const char *)"se00");	// set first SR persistence index
+platform/report.cpp~:		cmd->value = cmd_get_index((const char *)"", sr_defaults[i]);// load the index for the SR element
+platform/report.cpp~:		cmd->index++;									// increment SR NVM index
+platform/report.cpp~:		if (((cmd = cmd->nx) == NULL) || (cmd->objtype == TYPE_EMPTY)) { break;}
+platform/report.cpp~:		if ((cmd->objtype == TYPE_BOOL) && (fp_TRUE(cmd->value))) {
+platform/report.cpp~:			status_report_list[i] = cmd->index;
+platform/report.cpp~:			cmd->value = cmd->index;					// persist the index as the value
+platform/report.cpp~:			cmd->index = sr_start + i;					// index of the SR persistence location
+platform/report.cpp~:	cmd->objtype = TYPE_PARENT; 			// setup the parent object
+platform/report.cpp~:	strcpy(cmd->token, sr_str);
+platform/report.cpp~:	cmd->index = cmd_get_index((const char *)"", sr_str);// set the index - may be needed by calling function
+platform/report.cpp~:	cmd = cmd->nx;							// no need to check for NULL as list has just been reset
+platform/report.cpp~:		if ((cmd->index = sr.status_report_list[i]) == 0) { break;}
+platform/report.cpp~:		strcpy(tmp, cmd->group);			// concatenate groups and tokens
+platform/report.cpp~:		strcat(tmp, cmd->token);
+platform/report.cpp~:		strcpy(cmd->token, tmp);
+platform/report.cpp~:		if ((cmd = cmd->nx) == NULL)
+platform/report.cpp~:	cmd->objtype = TYPE_PARENT; 			// setup the parent object
+platform/report.cpp~:	strcpy(cmd->token, sr_str);
+platform/report.cpp~://	cmd->index = cmd_get_index((const char *)"", sr_str);// OMITTED - set the index - may be needed by calling function
+platform/report.cpp~:	cmd = cmd->nx;							// no need to check for NULL as list has just been reset
+platform/report.cpp~:		if ((cmd->index = sr.status_report_list[i]) == 0) { break;}
+platform/report.cpp~:		if (fp_EQ(cmd->value, sr.status_report_value[i])) {
+platform/report.cpp~:			cmd->objtype = TYPE_EMPTY;
+platform/report.cpp~:			strcpy(tmp, cmd->group);		// flatten out groups
+platform/report.cpp~:			strcat(tmp, cmd->token);
+platform/report.cpp~:			strcpy(cmd->token, tmp);
+platform/report.cpp~:			sr.status_report_value[i] = cmd->value;
+platform/report.cpp~:			if ((cmd = cmd->nx) == NULL) return (false); // should never be NULL unless SR length exceeds available buffer array
+platform/report.cpp~:	if (cmd->value < STATUS_REPORT_MIN_MS) { cmd->value = STATUS_REPORT_MIN_MS;}
+platform/report.cpp~:	sr.status_report_interval = (uint32_t)cmd->value;
+platform/report.cpp~:	cmd->value = (float)mp_get_planner_buffers_available();
+platform/report.cpp~:	cmd->objtype = TYPE_INTEGER;
+platform/report.cpp~:	cmd->nx = NULL;							// terminate the list
+platform/report.cpp~:    sprintf(cmd->token, PSTR("qr"));
+platform/report.cpp~:	cmd->value = qr.buffers_available;
+platform/report.cpp~:	cmd->objtype = TYPE_INTEGER;
