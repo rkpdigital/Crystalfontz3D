@@ -41,6 +41,7 @@ G2 has a number of advanced features, including:
 
 
 Versions:
+
 10049G2LEG - Old code for use with the compiled in FIQ code that expecte 2 12byte commands for each step.
 
 10049G2FIQ - New FIQ structure with 1 8byte command and a state machine in the FIQ to do 2 interrupts.
@@ -51,6 +52,7 @@ Version 2.0 dated 08/20/14 - FIQ and LEG versions - Also uses MOTOR_STATE more e
                                                     _load_move, and _output_to_FIQ to speed execution up by 33%.
 
 This is a snapshot of unit tested code and the output file was desk checked to be correct.
+
 
 
 
